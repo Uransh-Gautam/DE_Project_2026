@@ -8,13 +8,13 @@ This is the Data Engineering part of WorkGrid. The Advanced Programming project 
 
 ## What the Database Stores
 
-The database keeps track of four things: departments, employees, projects, and allocations.
+The database tracks four things: departments, employees, projects, and allocations.
 
 Every employee belongs to one department. An employee can work on many projects, and a project can have many employees, so a separate allocation record connects the two and stores how many hours were given. With this, questions like who is carrying the most hours or which project has the most people can be answered directly from the data.
 
 ## Design Approach
 
-We kept the design small on purpose. Each piece of information is stored in only one place and tables are linked using keys, which avoids repeated data and keeps updates simple. The tables are normalised up to third normal form.
+We kept the design small on purpose. Each piece of information is stored in a single place, and tables are linked via keys, which avoids duplicate data and simplifies updates. The tables are normalised up to third normal form.
 
 ## What We Are Practising
 
