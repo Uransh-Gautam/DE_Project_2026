@@ -1,4 +1,4 @@
-# DE_Project_2026
+# DE Project 2026
 
 The database behind WorkGrid, our workspace portal for tracking team workload.
 
