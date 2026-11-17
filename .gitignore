@@ -1,4 +1,6 @@
 seed_data/
 large_data/
-*.csv
+seed_data/*.csv
+large_data/*.csv
 .DS_Store
+database/database.db

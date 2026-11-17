@@ -24,6 +24,6 @@
       "github": "shloksrivastava2610-ops"
     }
   ],
-  "postgres_version": "15.20",
+  "postgres_version": "18.7",
   "laptop_used_for_benchmarks": "MacBook Pro M4 Pro"
 }
