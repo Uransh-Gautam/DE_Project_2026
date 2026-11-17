@@ -22,12 +22,12 @@
 
 | Role | Name | Enrollment No. | GitHub Username |
 |------|------|----------------|-----------------|
-| Group Lead | | | |
-| Member 2 | | | |
-| Member 3 | | | |
-| Member 4 | | | |
+| Group Lead | Uransh Gautam | 2501010690 | Uransh-Gautam |
+| Member 2 | Puneet Kumar | 2501010361 | puneet2946 |
+| Member 3 | Varun Adwani | 2501010499 | varunadwani |
+| Member 4 | Shlok Srivastava | 2501010434 | shloksrivastava2610-ops |
 
-**Team No.:** ____ · **Section:** ____ · **Repository URL:** ____
+**Team No.:** T0085 · **Section:** B · **Repository URL:** https://github.com/Uransh-Gautam/DE_Project_2026
 
 ---
 

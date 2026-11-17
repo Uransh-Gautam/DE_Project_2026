@@ -6,13 +6,13 @@ We ran the 30 given queries on the seed data before adding any extra indexes. Th
 
 - Laptop: MacBook Pro M4 Pro (the one listed in `team.json`)
 - PostgreSQL 18.7, Postgres.app. Course allows 15 or newer.
-- Database: `instagram_cp2`, loaded from `seed_data/` with `database/01_schema.sql` and `database/02_load_data.sql`, then `ANALYZE`
+- Database: `instagram_cp2`, loaded from `seed_data/` with `sql/01_schema.sql` and `sql/02_load_data.sql`, then `ANALYZE`
 - Command: `./benchmarks/run_benchmark.sh instagram_cp2 baseline`
 - Each number is the `Execution Time` from `EXPLAIN (ANALYZE, BUFFERS)`. Planning time is not included.
 - Writes ran inside `BEGIN` … `ROLLBACK`, so the tables were the same for every run.
 - Raw plans are in `benchmarks/results/baseline/`. `summary.csv` in that folder is what the script wrote.
 
-`W01` inserts a post and does not set `like_count`, `comment_count`, or `is_archived`. Those columns were `NOT NULL` with no default, so the insert failed. We added `DEFAULT 0`, `DEFAULT 0`, and `DEFAULT false` in `database/01_schema.sql`. The CSV load still writes the real counter values, so this only matters for a new insert.
+`W01` inserts a post and does not set `like_count`, `comment_count`, or `is_archived`. Those columns were `NOT NULL` with no default, so the insert failed. We added `DEFAULT 0`, `DEFAULT 0`, and `DEFAULT false` in `sql/01_schema.sql`. The CSV load still writes the real counter values, so this only matters for a new insert.
 
 Most pages were already in memory (`shared hit`). R01's first run was a bit slower than the third (6.567 ms, then 4.656 ms). The later runs are the cached ones.
 
