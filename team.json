@@ -1,0 +1,29 @@
+{
+  "team_number": "T0085",
+  "project_name": "WorkGrid",
+  "section": "B",
+  "group_lead": {
+    "name": "Uransh Gautam",
+    "enrollment_no": "2501010690",
+    "github": "Uransh-Gautam"
+  },
+  "members": [
+    {
+      "name": "Puneet Kumar",
+      "enrollment_no": "2501010361",
+      "github": "puneet2946"
+    },
+    {
+      "name": "Varun Adwani",
+      "enrollment_no": "2501010499",
+      "github": "varunadwani"
+    },
+    {
+      "name": "Shlok Srivastava",
+      "enrollment_no": "2501010434",
+      "github": "shloksrivastava2610-ops"
+    }
+  ],
+  "postgres_version": "15.20",
+  "laptop_used_for_benchmarks": "MacBook Pro M4 Pro"
+}
