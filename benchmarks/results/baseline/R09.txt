@@ -1,0 +1,69 @@
+=== R09 run 1 ===
+Sort  (cost=5474.07..5474.08 rows=1 width=32) (actual time=5.114..5.746 rows=15.00 loops=1)
+  Sort Key: f.created_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=2232
+  ->  Nested Loop  (cost=1000.29..5474.06 rows=1 width=32) (actual time=0.879..5.733 rows=15.00 loops=1)
+        Buffers: shared hit=2229
+        ->  Gather  (cost=1000.00..5465.76 rows=1 width=16) (actual time=0.872..5.661 rows=15.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2184
+              ->  Parallel Seq Scan on follows f  (cost=0.00..4465.66 rows=1 width=16) (actual time=0.570..4.044 rows=7.50 loops=2)
+                    Filter: ((followee_id = 338) AND (status = 'PENDING'::text))
+                    Rows Removed by Filter: 129286
+                    Buffers: shared hit=2184
+        ->  Index Scan using users_pkey on users u  (cost=0.29..8.30 rows=1 width=24) (actual time=0.004..0.004 rows=1.00 loops=15)
+              Index Cond: (user_id = f.follower_id)
+              Index Searches: 15
+              Buffers: shared hit=45
+Planning:
+  Buffers: shared hit=272
+Planning Time: 0.390 ms
+Execution Time: 5.772 ms
+=== R09 run 2 ===
+Sort  (cost=5474.07..5474.08 rows=1 width=32) (actual time=4.992..5.629 rows=15.00 loops=1)
+  Sort Key: f.created_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=2232
+  ->  Nested Loop  (cost=1000.29..5474.06 rows=1 width=32) (actual time=0.872..5.618 rows=15.00 loops=1)
+        Buffers: shared hit=2229
+        ->  Gather  (cost=1000.00..5465.76 rows=1 width=16) (actual time=0.866..5.549 rows=15.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2184
+              ->  Parallel Seq Scan on follows f  (cost=0.00..4465.66 rows=1 width=16) (actual time=0.641..4.003 rows=7.50 loops=2)
+                    Filter: ((followee_id = 338) AND (status = 'PENDING'::text))
+                    Rows Removed by Filter: 129286
+                    Buffers: shared hit=2184
+        ->  Index Scan using users_pkey on users u  (cost=0.29..8.30 rows=1 width=24) (actual time=0.004..0.004 rows=1.00 loops=15)
+              Index Cond: (user_id = f.follower_id)
+              Index Searches: 15
+              Buffers: shared hit=45
+Planning:
+  Buffers: shared hit=272
+Planning Time: 0.406 ms
+Execution Time: 5.654 ms
+=== R09 run 3 ===
+Sort  (cost=5474.07..5474.08 rows=1 width=32) (actual time=5.026..5.683 rows=15.00 loops=1)
+  Sort Key: f.created_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=2232
+  ->  Nested Loop  (cost=1000.29..5474.06 rows=1 width=32) (actual time=0.888..5.670 rows=15.00 loops=1)
+        Buffers: shared hit=2229
+        ->  Gather  (cost=1000.00..5465.76 rows=1 width=16) (actual time=0.882..5.598 rows=15.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2184
+              ->  Parallel Seq Scan on follows f  (cost=0.00..4465.66 rows=1 width=16) (actual time=0.566..3.976 rows=7.50 loops=2)
+                    Filter: ((followee_id = 338) AND (status = 'PENDING'::text))
+                    Rows Removed by Filter: 129286
+                    Buffers: shared hit=2184
+        ->  Index Scan using users_pkey on users u  (cost=0.29..8.30 rows=1 width=24) (actual time=0.004..0.004 rows=1.00 loops=15)
+              Index Cond: (user_id = f.follower_id)
+              Index Searches: 15
+              Buffers: shared hit=45
+Planning:
+  Buffers: shared hit=272
+Planning Time: 0.526 ms
+Execution Time: 5.709 ms

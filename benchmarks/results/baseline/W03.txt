@@ -1,0 +1,33 @@
+=== W03 run 1 ===
+Update on posts  (cost=0.29..8.31 rows=0 width=0) (actual time=0.124..0.124 rows=0.00 loops=1)
+  Buffers: shared hit=36 dirtied=1
+  ->  Index Scan using posts_pkey on posts  (cost=0.29..8.31 rows=1 width=10) (actual time=0.018..0.019 rows=1.00 loops=1)
+        Index Cond: (post_id = 59689)
+        Index Searches: 1
+        Buffers: shared hit=6
+Planning:
+  Buffers: shared hit=67
+Planning Time: 0.153 ms
+Execution Time: 0.536 ms
+=== W03 run 2 ===
+Update on posts  (cost=0.29..8.31 rows=0 width=0) (actual time=0.122..0.123 rows=0.00 loops=1)
+  Buffers: shared hit=39 dirtied=1
+  ->  Index Scan using posts_pkey on posts  (cost=0.29..8.31 rows=1 width=10) (actual time=0.019..0.020 rows=1.00 loops=1)
+        Index Cond: (post_id = 59689)
+        Index Searches: 1
+        Buffers: shared hit=8
+Planning:
+  Buffers: shared hit=67
+Planning Time: 0.270 ms
+Execution Time: 0.186 ms
+=== W03 run 3 ===
+Update on posts  (cost=0.29..8.31 rows=0 width=0) (actual time=0.091..0.091 rows=0.00 loops=1)
+  Buffers: shared hit=39 dirtied=1
+  ->  Index Scan using posts_pkey on posts  (cost=0.29..8.31 rows=1 width=10) (actual time=0.014..0.016 rows=1.00 loops=1)
+        Index Cond: (post_id = 59689)
+        Index Searches: 1
+        Buffers: shared hit=8
+Planning:
+  Buffers: shared hit=67
+Planning Time: 0.157 ms
+Execution Time: 0.133 ms

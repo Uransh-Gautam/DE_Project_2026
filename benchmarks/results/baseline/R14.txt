@@ -1,0 +1,75 @@
+=== R14 run 1 ===
+Merge Anti Join  (cost=5467.37..5489.61 rows=11 width=8) (actual time=5.633..6.353 rows=81.00 loops=1)
+  Merge Cond: (f.follower_id = b.followee_id)
+  Buffers: shared hit=2191
+  ->  Sort  (cost=5466.95..5466.98 rows=11 width=8) (actual time=5.608..6.324 rows=81.00 loops=1)
+        Sort Key: f.follower_id
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=2184
+        ->  Gather  (cost=1000.00..5466.76 rows=11 width=8) (actual time=0.239..6.312 rows=81.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2184
+              ->  Parallel Seq Scan on follows f  (cost=0.00..4465.66 rows=6 width=8) (actual time=0.130..4.400 rows=40.50 loops=2)
+                    Filter: ((followee_id = 217) AND (status = 'ACCEPTED'::text))
+                    Rows Removed by Filter: 129254
+                    Buffers: shared hit=2184
+  ->  Index Only Scan using follows_pkey on follows b  (cost=0.42..22.58 rows=9 width=8) (actual time=0.022..0.022 rows=5.00 loops=1)
+        Index Cond: (follower_id = 217)
+        Heap Fetches: 5
+        Index Searches: 1
+        Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=111
+Planning Time: 0.413 ms
+Execution Time: 6.387 ms
+=== R14 run 2 ===
+Merge Anti Join  (cost=5467.37..5489.61 rows=11 width=8) (actual time=5.856..6.555 rows=81.00 loops=1)
+  Merge Cond: (f.follower_id = b.followee_id)
+  Buffers: shared hit=2191
+  ->  Sort  (cost=5466.95..5466.98 rows=11 width=8) (actual time=5.832..6.527 rows=81.00 loops=1)
+        Sort Key: f.follower_id
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=2184
+        ->  Gather  (cost=1000.00..5466.76 rows=11 width=8) (actual time=0.179..6.514 rows=81.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2184
+              ->  Parallel Seq Scan on follows f  (cost=0.00..4465.66 rows=6 width=8) (actual time=0.123..4.693 rows=40.50 loops=2)
+                    Filter: ((followee_id = 217) AND (status = 'ACCEPTED'::text))
+                    Rows Removed by Filter: 129254
+                    Buffers: shared hit=2184
+  ->  Index Only Scan using follows_pkey on follows b  (cost=0.42..22.58 rows=9 width=8) (actual time=0.020..0.020 rows=5.00 loops=1)
+        Index Cond: (follower_id = 217)
+        Heap Fetches: 5
+        Index Searches: 1
+        Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=111
+Planning Time: 0.255 ms
+Execution Time: 6.585 ms
+=== R14 run 3 ===
+Merge Anti Join  (cost=5467.37..5489.61 rows=11 width=8) (actual time=5.229..5.904 rows=81.00 loops=1)
+  Merge Cond: (f.follower_id = b.followee_id)
+  Buffers: shared hit=2191
+  ->  Sort  (cost=5466.95..5466.98 rows=11 width=8) (actual time=5.198..5.870 rows=81.00 loops=1)
+        Sort Key: f.follower_id
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=2184
+        ->  Gather  (cost=1000.00..5466.76 rows=11 width=8) (actual time=0.195..5.857 rows=81.00 loops=1)
+              Workers Planned: 1
+              Workers Launched: 1
+              Buffers: shared hit=2184
+              ->  Parallel Seq Scan on follows f  (cost=0.00..4465.66 rows=6 width=8) (actual time=0.078..4.069 rows=40.50 loops=2)
+                    Filter: ((followee_id = 217) AND (status = 'ACCEPTED'::text))
+                    Rows Removed by Filter: 129254
+                    Buffers: shared hit=2184
+  ->  Index Only Scan using follows_pkey on follows b  (cost=0.42..22.58 rows=9 width=8) (actual time=0.027..0.027 rows=5.00 loops=1)
+        Index Cond: (follower_id = 217)
+        Heap Fetches: 5
+        Index Searches: 1
+        Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=111
+Planning Time: 0.252 ms
+Execution Time: 5.934 ms

@@ -1,0 +1,72 @@
+=== R10 run 1 ===
+Sort  (cost=1215.25..1215.25 rows=1 width=34) (actual time=2.372..2.373 rows=6.00 loops=1)
+  Sort Key: s.created_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=402
+  ->  Hash Join  (cost=22.71..1215.24 rows=1 width=34) (actual time=2.129..2.364 rows=6.00 loops=1)
+        Hash Cond: (s.user_id = f.followee_id)
+        Buffers: shared hit=399
+        ->  Seq Scan on stories s  (cost=0.00..1192.00 rows=200 width=34) (actual time=2.072..2.286 rows=2197.00 loops=1)
+              Filter: ((date(created_at) >= '2026-06-01'::date) AND (date(created_at) <= '2026-06-30'::date))
+              Rows Removed by Filter: 37803
+              Buffers: shared hit=392
+        ->  Hash  (cost=22.60..22.60 rows=9 width=8) (actual time=0.023..0.023 rows=14.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=7
+              ->  Index Scan using follows_pkey on follows f  (cost=0.42..22.60 rows=9 width=8) (actual time=0.018..0.019 rows=14.00 loops=1)
+                    Index Cond: (follower_id = 1042)
+                    Filter: (status = 'ACCEPTED'::text)
+                    Index Searches: 1
+                    Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=224
+Planning Time: 0.351 ms
+Execution Time: 2.398 ms
+=== R10 run 2 ===
+Sort  (cost=1215.25..1215.25 rows=1 width=34) (actual time=2.384..2.385 rows=6.00 loops=1)
+  Sort Key: s.created_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=402
+  ->  Hash Join  (cost=22.71..1215.24 rows=1 width=34) (actual time=2.145..2.377 rows=6.00 loops=1)
+        Hash Cond: (s.user_id = f.followee_id)
+        Buffers: shared hit=399
+        ->  Seq Scan on stories s  (cost=0.00..1192.00 rows=200 width=34) (actual time=2.090..2.300 rows=2197.00 loops=1)
+              Filter: ((date(created_at) >= '2026-06-01'::date) AND (date(created_at) <= '2026-06-30'::date))
+              Rows Removed by Filter: 37803
+              Buffers: shared hit=392
+        ->  Hash  (cost=22.60..22.60 rows=9 width=8) (actual time=0.022..0.022 rows=14.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=7
+              ->  Index Scan using follows_pkey on follows f  (cost=0.42..22.60 rows=9 width=8) (actual time=0.017..0.019 rows=14.00 loops=1)
+                    Index Cond: (follower_id = 1042)
+                    Filter: (status = 'ACCEPTED'::text)
+                    Index Searches: 1
+                    Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=224
+Planning Time: 0.284 ms
+Execution Time: 2.406 ms
+=== R10 run 3 ===
+Sort  (cost=1215.25..1215.25 rows=1 width=34) (actual time=2.326..2.327 rows=6.00 loops=1)
+  Sort Key: s.created_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=402
+  ->  Hash Join  (cost=22.71..1215.24 rows=1 width=34) (actual time=2.068..2.318 rows=6.00 loops=1)
+        Hash Cond: (s.user_id = f.followee_id)
+        Buffers: shared hit=399
+        ->  Seq Scan on stories s  (cost=0.00..1192.00 rows=200 width=34) (actual time=2.021..2.244 rows=2197.00 loops=1)
+              Filter: ((date(created_at) >= '2026-06-01'::date) AND (date(created_at) <= '2026-06-30'::date))
+              Rows Removed by Filter: 37803
+              Buffers: shared hit=392
+        ->  Hash  (cost=22.60..22.60 rows=9 width=8) (actual time=0.016..0.016 rows=14.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 9kB
+              Buffers: shared hit=7
+              ->  Index Scan using follows_pkey on follows f  (cost=0.42..22.60 rows=9 width=8) (actual time=0.012..0.014 rows=14.00 loops=1)
+                    Index Cond: (follower_id = 1042)
+                    Filter: (status = 'ACCEPTED'::text)
+                    Index Searches: 1
+                    Buffers: shared hit=7
+Planning:
+  Buffers: shared hit=224
+Planning Time: 0.280 ms
+Execution Time: 2.350 ms
