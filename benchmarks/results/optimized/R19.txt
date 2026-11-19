@@ -1,0 +1,96 @@
+=== R19 run 1 ===
+Sort  (cost=13889.78..13890.52 rows=294 width=40) (actual time=80.086..80.097 rows=294.00 loops=1)
+  Sort Key: (COALESCE((count(l.post_id)), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 41kB
+  Buffers: shared hit=3790
+  ->  Hash Right Join  (cost=13425.92..13877.73 rows=294 width=40) (actual time=78.496..80.055 rows=294.00 loops=1)
+        Hash Cond: (p.user_id = u.user_id)
+        Buffers: shared hit=3787
+        ->  HashAggregate  (cost=13401.65..13601.34 rows=19969 width=24) (actual time=78.287..79.252 rows=23340.00 loops=1)
+              Group Key: p.user_id
+              Batches: 1  Memory Usage: 1817kB
+              Buffers: shared hit=3600
+              ->  Hash Right Join  (cost=2214.00..10252.00 rows=419954 width=24) (actual time=6.058..51.087 rows=420116.00 loops=1)
+                    Hash Cond: (l.post_id = p.post_id)
+                    Buffers: shared hit=3600
+                    ->  Seq Scan on likes l  (cost=0.00..6935.54 rows=419954 width=8) (actual time=0.012..11.643 rows=419954.00 loops=1)
+                          Buffers: shared hit=2736
+                    ->  Hash  (cost=1464.00..1464.00 rows=60000 width=24) (actual time=6.015..6.016 rows=60000.00 loops=1)
+                          Buckets: 65536  Batches: 1  Memory Usage: 3794kB
+                          Buffers: shared hit=864
+                          ->  Seq Scan on posts p  (cost=0.00..1464.00 rows=60000 width=24) (actual time=0.003..3.405 rows=60000.00 loops=1)
+                                Buffers: shared hit=864
+        ->  Hash  (cost=20.59..20.59 rows=294 width=24) (actual time=0.187..0.187 rows=294.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 25kB
+              Buffers: shared hit=187
+              ->  Index Scan using users_verified_idx on users u  (cost=0.15..20.59 rows=294 width=24) (actual time=0.005..0.170 rows=294.00 loops=1)
+                    Index Searches: 1
+                    Buffers: shared hit=187
+Planning:
+  Buffers: shared hit=384
+Planning Time: 0.746 ms
+Execution Time: 80.189 ms
+=== R19 run 2 ===
+Sort  (cost=13889.78..13890.52 rows=294 width=40) (actual time=81.382..81.391 rows=294.00 loops=1)
+  Sort Key: (COALESCE((count(l.post_id)), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 41kB
+  Buffers: shared hit=3790
+  ->  Hash Right Join  (cost=13425.92..13877.73 rows=294 width=40) (actual time=79.783..81.351 rows=294.00 loops=1)
+        Hash Cond: (p.user_id = u.user_id)
+        Buffers: shared hit=3787
+        ->  HashAggregate  (cost=13401.65..13601.34 rows=19969 width=24) (actual time=79.590..80.560 rows=23340.00 loops=1)
+              Group Key: p.user_id
+              Batches: 1  Memory Usage: 1817kB
+              Buffers: shared hit=3600
+              ->  Hash Right Join  (cost=2214.00..10252.00 rows=419954 width=24) (actual time=5.744..51.389 rows=420116.00 loops=1)
+                    Hash Cond: (l.post_id = p.post_id)
+                    Buffers: shared hit=3600
+                    ->  Seq Scan on likes l  (cost=0.00..6935.54 rows=419954 width=8) (actual time=0.007..9.579 rows=419954.00 loops=1)
+                          Buffers: shared hit=2736
+                    ->  Hash  (cost=1464.00..1464.00 rows=60000 width=24) (actual time=5.707..5.709 rows=60000.00 loops=1)
+                          Buckets: 65536  Batches: 1  Memory Usage: 3794kB
+                          Buffers: shared hit=864
+                          ->  Seq Scan on posts p  (cost=0.00..1464.00 rows=60000 width=24) (actual time=0.003..3.180 rows=60000.00 loops=1)
+                                Buffers: shared hit=864
+        ->  Hash  (cost=20.59..20.59 rows=294 width=24) (actual time=0.171..0.171 rows=294.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 25kB
+              Buffers: shared hit=187
+              ->  Index Scan using users_verified_idx on users u  (cost=0.15..20.59 rows=294 width=24) (actual time=0.004..0.156 rows=294.00 loops=1)
+                    Index Searches: 1
+                    Buffers: shared hit=187
+Planning:
+  Buffers: shared hit=384
+Planning Time: 0.782 ms
+Execution Time: 81.499 ms
+=== R19 run 3 ===
+Sort  (cost=13889.78..13890.52 rows=294 width=40) (actual time=78.401..78.411 rows=294.00 loops=1)
+  Sort Key: (COALESCE((count(l.post_id)), '0'::bigint)) DESC
+  Sort Method: quicksort  Memory: 41kB
+  Buffers: shared hit=3790
+  ->  Hash Right Join  (cost=13425.92..13877.73 rows=294 width=40) (actual time=76.884..78.369 rows=294.00 loops=1)
+        Hash Cond: (p.user_id = u.user_id)
+        Buffers: shared hit=3787
+        ->  HashAggregate  (cost=13401.65..13601.34 rows=19969 width=24) (actual time=76.698..77.604 rows=23340.00 loops=1)
+              Group Key: p.user_id
+              Batches: 1  Memory Usage: 1817kB
+              Buffers: shared hit=3600
+              ->  Hash Right Join  (cost=2214.00..10252.00 rows=419954 width=24) (actual time=6.237..49.215 rows=420116.00 loops=1)
+                    Hash Cond: (l.post_id = p.post_id)
+                    Buffers: shared hit=3600
+                    ->  Seq Scan on likes l  (cost=0.00..6935.54 rows=419954 width=8) (actual time=0.025..9.426 rows=419954.00 loops=1)
+                          Buffers: shared hit=2736
+                    ->  Hash  (cost=1464.00..1464.00 rows=60000 width=24) (actual time=6.173..6.175 rows=60000.00 loops=1)
+                          Buckets: 65536  Batches: 1  Memory Usage: 3794kB
+                          Buffers: shared hit=864
+                          ->  Seq Scan on posts p  (cost=0.00..1464.00 rows=60000 width=24) (actual time=0.003..3.422 rows=60000.00 loops=1)
+                                Buffers: shared hit=864
+        ->  Hash  (cost=20.59..20.59 rows=294 width=24) (actual time=0.166..0.166 rows=294.00 loops=1)
+              Buckets: 1024  Batches: 1  Memory Usage: 25kB
+              Buffers: shared hit=187
+              ->  Index Scan using users_verified_idx on users u  (cost=0.15..20.59 rows=294 width=24) (actual time=0.004..0.152 rows=294.00 loops=1)
+                    Index Searches: 1
+                    Buffers: shared hit=187
+Planning:
+  Buffers: shared hit=384
+Planning Time: 0.656 ms
+Execution Time: 78.490 ms

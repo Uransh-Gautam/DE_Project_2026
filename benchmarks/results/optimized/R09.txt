@@ -1,0 +1,45 @@
+=== R09 run 1 ===
+Nested Loop  (cost=0.71..16.75 rows=1 width=32) (actual time=0.394..0.496 rows=15.00 loops=1)
+  Buffers: shared hit=64 read=2
+  ->  Index Scan using follows_followee_status_created_idx on follows f  (cost=0.42..8.44 rows=1 width=16) (actual time=0.385..0.431 rows=15.00 loops=1)
+        Index Cond: ((followee_id = 338) AND (status = 'PENDING'::text))
+        Index Searches: 1
+        Buffers: shared hit=19 read=2
+  ->  Index Scan using users_pkey on users u  (cost=0.29..8.30 rows=1 width=24) (actual time=0.004..0.004 rows=1.00 loops=15)
+        Index Cond: (user_id = f.follower_id)
+        Index Searches: 15
+        Buffers: shared hit=45
+Planning:
+  Buffers: shared hit=362
+Planning Time: 0.560 ms
+Execution Time: 0.519 ms
+=== R09 run 2 ===
+Nested Loop  (cost=0.71..16.75 rows=1 width=32) (actual time=0.020..0.071 rows=15.00 loops=1)
+  Buffers: shared hit=66
+  ->  Index Scan using follows_followee_status_created_idx on follows f  (cost=0.42..8.44 rows=1 width=16) (actual time=0.015..0.031 rows=15.00 loops=1)
+        Index Cond: ((followee_id = 338) AND (status = 'PENDING'::text))
+        Index Searches: 1
+        Buffers: shared hit=21
+  ->  Index Scan using users_pkey on users u  (cost=0.29..8.30 rows=1 width=24) (actual time=0.003..0.003 rows=1.00 loops=15)
+        Index Cond: (user_id = f.follower_id)
+        Index Searches: 15
+        Buffers: shared hit=45
+Planning:
+  Buffers: shared hit=362
+Planning Time: 0.518 ms
+Execution Time: 0.089 ms
+=== R09 run 3 ===
+Nested Loop  (cost=0.71..16.75 rows=1 width=32) (actual time=0.020..0.075 rows=15.00 loops=1)
+  Buffers: shared hit=66
+  ->  Index Scan using follows_followee_status_created_idx on follows f  (cost=0.42..8.44 rows=1 width=16) (actual time=0.016..0.033 rows=15.00 loops=1)
+        Index Cond: ((followee_id = 338) AND (status = 'PENDING'::text))
+        Index Searches: 1
+        Buffers: shared hit=21
+  ->  Index Scan using users_pkey on users u  (cost=0.29..8.30 rows=1 width=24) (actual time=0.003..0.003 rows=1.00 loops=15)
+        Index Cond: (user_id = f.follower_id)
+        Index Searches: 15
+        Buffers: shared hit=45
+Planning:
+  Buffers: shared hit=362
+Planning Time: 0.521 ms
+Execution Time: 0.094 ms

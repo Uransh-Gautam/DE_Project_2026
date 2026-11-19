@@ -1,0 +1,33 @@
+=== W06 run 1 ===
+Update on follows  (cost=0.42..8.44 rows=0 width=0) (actual time=0.997..0.997 rows=0.00 loops=1)
+  Buffers: shared hit=232 read=1 dirtied=33
+  ->  Index Scan using follows_followee_status_created_idx on follows  (cost=0.42..8.44 rows=1 width=38) (actual time=0.022..0.040 rows=15.00 loops=1)
+        Index Cond: ((followee_id = 338) AND (status = 'PENDING'::text))
+        Index Searches: 1
+        Buffers: shared hit=21
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.196 ms
+Execution Time: 1.040 ms
+=== W06 run 2 ===
+Update on follows  (cost=0.42..8.44 rows=0 width=0) (actual time=0.269..0.269 rows=0.00 loops=1)
+  Buffers: shared hit=220 dirtied=3 written=1
+  ->  Index Scan using follows_followee_status_created_idx on follows  (cost=0.42..8.44 rows=1 width=38) (actual time=0.023..0.053 rows=15.00 loops=1)
+        Index Cond: ((followee_id = 338) AND (status = 'PENDING'::text))
+        Index Searches: 1
+        Buffers: shared hit=21
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.183 ms
+Execution Time: 0.309 ms
+=== W06 run 3 ===
+Update on follows  (cost=0.42..8.44 rows=0 width=0) (actual time=0.187..0.187 rows=0.00 loops=1)
+  Buffers: shared hit=218 dirtied=1
+  ->  Index Scan using follows_followee_status_created_idx on follows  (cost=0.42..8.44 rows=1 width=38) (actual time=0.024..0.053 rows=15.00 loops=1)
+        Index Cond: ((followee_id = 338) AND (status = 'PENDING'::text))
+        Index Searches: 1
+        Buffers: shared hit=21
+Planning:
+  Buffers: shared hit=114
+Planning Time: 0.184 ms
+Execution Time: 0.227 ms

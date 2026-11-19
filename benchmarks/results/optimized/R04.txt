@@ -1,0 +1,90 @@
+=== R04 run 1 ===
+Sort  (cost=292.88..292.94 rows=25 width=48) (actual time=1.347..1.348 rows=12.00 loops=1)
+  Sort Key: c.created_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=35 read=14
+  ->  GroupAggregate  (cost=291.86..292.30 rows=25 width=48) (actual time=1.336..1.339 rows=12.00 loops=1)
+        Group Key: c.comment_id
+        Buffers: shared hit=32 read=14
+        ->  Sort  (cost=291.86..291.92 rows=25 width=48) (actual time=1.332..1.333 rows=12.00 loops=1)
+              Sort Key: c.comment_id
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=32 read=14
+              ->  Nested Loop Left Join  (cost=4.90..291.28 rows=25 width=48) (actual time=0.589..1.323 rows=12.00 loops=1)
+                    Buffers: shared hit=29 read=14
+                    ->  Bitmap Heap Scan on comments c  (cost=4.61..95.40 rows=25 width=40) (actual time=0.353..0.399 rows=12.00 loops=1)
+                          Recheck Cond: ((post_id = 59689) AND (parent_comment_id IS NULL) AND (NOT is_hidden))
+                          Heap Blocks: exact=12
+                          Buffers: shared hit=15 read=3
+                          ->  Bitmap Index Scan on comments_post_top_level_idx  (cost=0.00..4.61 rows=25 width=0) (actual time=0.340..0.340 rows=12.00 loops=1)
+                                Index Cond: (post_id = 59689)
+                                Index Searches: 1
+                                Buffers: shared hit=3 read=3
+                    ->  Index Scan using comments_parent_idx on comments r  (cost=0.29..7.82 rows=1 width=16) (actual time=0.077..0.077 rows=0.08 loops=12)
+                          Index Cond: (parent_comment_id = c.comment_id)
+                          Index Searches: 12
+                          Buffers: shared hit=14 read=11
+Planning:
+  Buffers: shared hit=219
+Planning Time: 0.489 ms
+Execution Time: 1.378 ms
+=== R04 run 2 ===
+Sort  (cost=292.88..292.94 rows=25 width=48) (actual time=0.062..0.062 rows=12.00 loops=1)
+  Sort Key: c.created_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=49
+  ->  GroupAggregate  (cost=291.86..292.30 rows=25 width=48) (actual time=0.052..0.055 rows=12.00 loops=1)
+        Group Key: c.comment_id
+        Buffers: shared hit=46
+        ->  Sort  (cost=291.86..291.92 rows=25 width=48) (actual time=0.050..0.050 rows=12.00 loops=1)
+              Sort Key: c.comment_id
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=46
+              ->  Nested Loop Left Join  (cost=4.90..291.28 rows=25 width=48) (actual time=0.014..0.043 rows=12.00 loops=1)
+                    Buffers: shared hit=43
+                    ->  Bitmap Heap Scan on comments c  (cost=4.61..95.40 rows=25 width=40) (actual time=0.011..0.023 rows=12.00 loops=1)
+                          Recheck Cond: ((post_id = 59689) AND (parent_comment_id IS NULL) AND (NOT is_hidden))
+                          Heap Blocks: exact=12
+                          Buffers: shared hit=18
+                          ->  Bitmap Index Scan on comments_post_top_level_idx  (cost=0.00..4.61 rows=25 width=0) (actual time=0.007..0.007 rows=12.00 loops=1)
+                                Index Cond: (post_id = 59689)
+                                Index Searches: 1
+                                Buffers: shared hit=6
+                    ->  Index Scan using comments_parent_idx on comments r  (cost=0.29..7.82 rows=1 width=16) (actual time=0.001..0.001 rows=0.08 loops=12)
+                          Index Cond: (parent_comment_id = c.comment_id)
+                          Index Searches: 12
+                          Buffers: shared hit=25
+Planning:
+  Buffers: shared hit=219
+Planning Time: 0.415 ms
+Execution Time: 0.092 ms
+=== R04 run 3 ===
+Sort  (cost=292.88..292.94 rows=25 width=48) (actual time=0.065..0.066 rows=12.00 loops=1)
+  Sort Key: c.created_at
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=49
+  ->  GroupAggregate  (cost=291.86..292.30 rows=25 width=48) (actual time=0.055..0.058 rows=12.00 loops=1)
+        Group Key: c.comment_id
+        Buffers: shared hit=46
+        ->  Sort  (cost=291.86..291.92 rows=25 width=48) (actual time=0.053..0.053 rows=12.00 loops=1)
+              Sort Key: c.comment_id
+              Sort Method: quicksort  Memory: 25kB
+              Buffers: shared hit=46
+              ->  Nested Loop Left Join  (cost=4.90..291.28 rows=25 width=48) (actual time=0.016..0.045 rows=12.00 loops=1)
+                    Buffers: shared hit=43
+                    ->  Bitmap Heap Scan on comments c  (cost=4.61..95.40 rows=25 width=40) (actual time=0.012..0.023 rows=12.00 loops=1)
+                          Recheck Cond: ((post_id = 59689) AND (parent_comment_id IS NULL) AND (NOT is_hidden))
+                          Heap Blocks: exact=12
+                          Buffers: shared hit=18
+                          ->  Bitmap Index Scan on comments_post_top_level_idx  (cost=0.00..4.61 rows=25 width=0) (actual time=0.007..0.007 rows=12.00 loops=1)
+                                Index Cond: (post_id = 59689)
+                                Index Searches: 1
+                                Buffers: shared hit=6
+                    ->  Index Scan using comments_parent_idx on comments r  (cost=0.29..7.82 rows=1 width=16) (actual time=0.002..0.002 rows=0.08 loops=12)
+                          Index Cond: (parent_comment_id = c.comment_id)
+                          Index Searches: 12
+                          Buffers: shared hit=25
+Planning:
+  Buffers: shared hit=219
+Planning Time: 0.408 ms
+Execution Time: 0.095 ms
