@@ -1,0 +1,117 @@
+=== R11 run 1 ===
+Limit  (cost=18977.79..18977.84 rows=20 width=61) (actual time=37.082..37.840 rows=20.00 loops=1)
+  Buffers: shared hit=11907 read=6226 written=421
+  ->  Sort  (cost=18977.79..18983.83 rows=2414 width=61) (actual time=37.082..37.838 rows=20.00 loops=1)
+        Sort Key: (round(((sum((p.like_count + p.comment_count)))::numeric / (NULLIF(u.followers_count, 0))::numeric), 3)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=11907 read=6226 written=421
+        ->  GroupAggregate  (cost=18559.99..18913.56 rows=2414 width=61) (actual time=33.617..37.388 rows=3393.00 loops=1)
+              Group Key: u.username
+              Buffers: shared hit=11904 read=6226 written=421
+              ->  Gather Merge  (cost=18559.99..18841.14 rows=2414 width=37) (actual time=33.590..36.019 rows=17686.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=11904 read=6226 written=421
+                    ->  Sort  (cost=17559.96..17562.48 rows=1006 width=37) (actual time=31.220..31.332 rows=5895.33 loops=3)
+                          Sort Key: u.username
+                          Sort Method: quicksort  Memory: 527kB
+                          Buffers: shared hit=11904 read=6226 written=421
+                          Worker 0:  Sort Method: quicksort  Memory: 532kB
+                          Worker 1:  Sort Method: quicksort  Memory: 517kB
+                          ->  Parallel Hash Join  (cost=2512.35..17509.79 rows=1006 width=37) (actual time=7.311..29.026 rows=5895.33 loops=3)
+                                Hash Cond: (p.user_id = u.user_id)
+                                Buffers: shared hit=11888 read=6226 written=421
+                                ->  Parallel Index Scan using posts_created_at_idx on posts p  (cost=0.43..14561.46 rows=166251 width=16) (actual time=0.364..15.685 rows=132600.67 loops=3)
+                                      Index Cond: (created_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                      Index Searches: 1
+                                      Buffers: shared hit=1607 read=6060 written=318
+                                ->  Parallel Hash  (cost=2485.23..2485.23 rows=2135 width=29) (actual time=6.873..6.873 rows=1324.33 loops=3)
+                                      Buckets: 4096  Batches: 1  Memory Usage: 352kB
+                                      Buffers: shared hit=10281 read=166 written=103
+                                      ->  Parallel Index Scan using users_creator_idx on users u  (cost=0.29..2485.23 rows=2135 width=29) (actual time=0.123..6.758 rows=1324.33 loops=3)
+                                            Filter: (followers_count >= 20)
+                                            Rows Removed by Filter: 18759
+                                            Index Searches: 1
+                                            Buffers: shared hit=10281 read=166 written=103
+Planning:
+  Buffers: shared hit=370 read=1
+Planning Time: 0.820 ms
+Execution Time: 37.881 ms
+=== R11 run 2 ===
+Limit  (cost=18977.79..18977.84 rows=20 width=61) (actual time=28.933..29.633 rows=20.00 loops=1)
+  Buffers: shared hit=12854 read=5277 written=16
+  ->  Sort  (cost=18977.79..18983.83 rows=2414 width=61) (actual time=28.932..29.631 rows=20.00 loops=1)
+        Sort Key: (round(((sum((p.like_count + p.comment_count)))::numeric / (NULLIF(u.followers_count, 0))::numeric), 3)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=12854 read=5277 written=16
+        ->  GroupAggregate  (cost=18559.99..18913.56 rows=2414 width=61) (actual time=25.696..29.342 rows=3393.00 loops=1)
+              Group Key: u.username
+              Buffers: shared hit=12851 read=5277 written=16
+              ->  Gather Merge  (cost=18559.99..18841.14 rows=2414 width=37) (actual time=25.687..28.018 rows=17686.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=12851 read=5277 written=16
+                    ->  Sort  (cost=17559.96..17562.48 rows=1006 width=37) (actual time=24.418..24.534 rows=5895.33 loops=3)
+                          Sort Key: u.username
+                          Sort Method: quicksort  Memory: 518kB
+                          Buffers: shared hit=12851 read=5277 written=16
+                          Worker 0:  Sort Method: quicksort  Memory: 531kB
+                          Worker 1:  Sort Method: quicksort  Memory: 527kB
+                          ->  Parallel Hash Join  (cost=2512.35..17509.79 rows=1006 width=37) (actual time=5.050..22.677 rows=5895.33 loops=3)
+                                Hash Cond: (p.user_id = u.user_id)
+                                Buffers: shared hit=12835 read=5277 written=16
+                                ->  Parallel Index Scan using posts_created_at_idx on posts p  (cost=0.43..14561.46 rows=166251 width=16) (actual time=0.085..11.308 rows=132600.67 loops=3)
+                                      Index Cond: (created_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                      Index Searches: 1
+                                      Buffers: shared hit=2553 read=5111 written=16
+                                ->  Parallel Hash  (cost=2485.23..2485.23 rows=2135 width=29) (actual time=4.944..4.945 rows=1324.33 loops=3)
+                                      Buckets: 4096  Batches: 1  Memory Usage: 352kB
+                                      Buffers: shared hit=10282 read=166
+                                      ->  Parallel Index Scan using users_creator_idx on users u  (cost=0.29..2485.23 rows=2135 width=29) (actual time=0.027..4.842 rows=1324.33 loops=3)
+                                            Filter: (followers_count >= 20)
+                                            Rows Removed by Filter: 18759
+                                            Index Searches: 1
+                                            Buffers: shared hit=10282 read=166
+Planning:
+  Buffers: shared hit=366 read=5
+Planning Time: 0.777 ms
+Execution Time: 29.663 ms
+=== R11 run 3 ===
+Limit  (cost=18977.79..18977.84 rows=20 width=61) (actual time=34.630..35.472 rows=20.00 loops=1)
+  Buffers: shared hit=4360 read=13780
+  ->  Sort  (cost=18977.79..18983.83 rows=2414 width=61) (actual time=34.629..35.471 rows=20.00 loops=1)
+        Sort Key: (round(((sum((p.like_count + p.comment_count)))::numeric / (NULLIF(u.followers_count, 0))::numeric), 3)) DESC
+        Sort Method: top-N heapsort  Memory: 27kB
+        Buffers: shared hit=4360 read=13780
+        ->  GroupAggregate  (cost=18559.99..18913.56 rows=2414 width=61) (actual time=31.444..35.185 rows=3393.00 loops=1)
+              Group Key: u.username
+              Buffers: shared hit=4357 read=13780
+              ->  Gather Merge  (cost=18559.99..18841.14 rows=2414 width=37) (actual time=31.433..33.878 rows=17686.00 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    Buffers: shared hit=4357 read=13780
+                    ->  Sort  (cost=17559.96..17562.48 rows=1006 width=37) (actual time=30.128..30.247 rows=5895.33 loops=3)
+                          Sort Key: u.username
+                          Sort Method: quicksort  Memory: 537kB
+                          Buffers: shared hit=4357 read=13780
+                          Worker 0:  Sort Method: quicksort  Memory: 526kB
+                          Worker 1:  Sort Method: quicksort  Memory: 512kB
+                          ->  Parallel Hash Join  (cost=2512.35..17509.79 rows=1006 width=37) (actual time=10.213..28.186 rows=5895.33 loops=3)
+                                Hash Cond: (p.user_id = u.user_id)
+                                Buffers: shared hit=4341 read=13780
+                                ->  Parallel Index Scan using posts_created_at_idx on posts p  (cost=0.43..14561.46 rows=166251 width=16) (actual time=0.080..10.909 rows=132600.67 loops=3)
+                                      Index Cond: (created_at >= '2026-01-01 00:00:00+05:30'::timestamp with time zone)
+                                      Index Searches: 1
+                                      Buffers: shared hit=2691 read=4976
+                                ->  Parallel Hash  (cost=2485.23..2485.23 rows=2135 width=29) (actual time=10.103..10.103 rows=1324.33 loops=3)
+                                      Buckets: 4096  Batches: 1  Memory Usage: 352kB
+                                      Buffers: shared hit=1650 read=8804
+                                      ->  Parallel Index Scan using users_creator_idx on users u  (cost=0.29..2485.23 rows=2135 width=29) (actual time=0.029..9.972 rows=1324.33 loops=3)
+                                            Filter: (followers_count >= 20)
+                                            Rows Removed by Filter: 18759
+                                            Index Searches: 1
+                                            Buffers: shared hit=1650 read=8804
+Planning:
+  Buffers: shared hit=371
+Planning Time: 0.569 ms
+Execution Time: 35.502 ms

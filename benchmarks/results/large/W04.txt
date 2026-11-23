@@ -1,0 +1,93 @@
+=== W04 run 1 ===
+Update on users u  (cost=11381.50..542396.79 rows=0 width=0) (actual time=7208.177..7208.178 rows=0.00 loops=1)
+  Buffers: shared hit=2368694 read=3220531 dirtied=23693 written=22625
+  ->  Merge Join  (cost=11381.50..542396.79 rows=597073 width=50) (actual time=122.755..6743.406 rows=24000.00 loops=1)
+        Merge Cond: (s.user_id = u.user_id)
+        Join Filter: (u.followers_count <> COALESCE(s.n, '0'::bigint))
+        Rows Removed by Join Filter: 576000
+        Buffers: shared hit=1854239 read=3208918 written=21412
+        ->  Subquery Scan on s  (cost=11381.07..504616.28 rows=600000 width=56) (actual time=90.051..6625.684 rows=600000.00 loops=1)
+              Buffers: shared hit=1852208 read=3198966 written=21314
+              ->  GroupAggregate  (cost=11381.07..498616.28 rows=600000 width=16) (actual time=90.030..6582.998 rows=600000.00 loops=1)
+                    Group Key: uu.user_id
+                    Buffers: shared hit=1852208 read=3198966 written=21314
+                    ->  Merge Left Join  (cost=11381.07..467544.00 rows=5014456 width=16) (actual time=0.017..6398.673 rows=5020097.00 loops=1)
+                          Merge Cond: (uu.user_id = f.followee_id)
+                          Buffers: shared hit=1852208 read=3198966 written=21314
+                          ->  Index Only Scan using users_pkey on users uu  (cost=0.42..15614.43 rows=600000 width=8) (actual time=0.002..47.831 rows=600000.00 loops=1)
+                                Heap Fetches: 461304
+                                Index Searches: 1
+                                Buffers: shared hit=9983 read=2001 written=18
+                          ->  Index Scan using follows_followee_status_created_idx on follows f  (cost=0.56..387748.87 rows=5014456 width=16) (actual time=0.013..6080.925 rows=5008203.00 loops=1)
+                                Index Cond: (status = 'ACCEPTED'::text)
+                                Index Searches: 1
+                                Buffers: shared hit=1842225 read=3196965 written=21296
+        ->  Index Scan using users_pkey on users u  (cost=0.42..25787.83 rows=600000 width=18) (actual time=0.298..66.976 rows=600000.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=2031 read=9952 written=98
+Planning:
+  Buffers: shared hit=360
+Planning Time: 0.531 ms
+Execution Time: 7208.256 ms
+=== W04 run 2 ===
+Update on users u  (cost=11381.50..544834.79 rows=0 width=0) (actual time=7167.731..7167.732 rows=0.00 loops=1)
+  Buffers: shared hit=2535703 read=3220342 dirtied=24332 written=22180
+  ->  Merge Join  (cost=11381.50..544834.79 rows=619861 width=50) (actual time=113.090..6752.839 rows=24000.00 loops=1)
+        Merge Cond: (s.user_id = u.user_id)
+        Join Filter: (u.followers_count <> COALESCE(s.n, '0'::bigint))
+        Rows Removed by Join Filter: 576000
+        Buffers: shared hit=1952179 read=3207598 dirtied=10558 written=21604
+        ->  Subquery Scan on s  (cost=11381.07..505864.04 rows=622900 width=56) (actual time=79.956..6647.493 rows=600000.00 loops=1)
+              Buffers: shared hit=1891068 read=3207596 dirtied=10558 written=21604
+              ->  GroupAggregate  (cost=11381.07..499635.04 rows=622900 width=16) (actual time=79.946..6604.280 rows=600000.00 loops=1)
+                    Group Key: uu.user_id
+                    Buffers: shared hit=1891068 read=3207596 dirtied=10558 written=21604
+                    ->  Merge Left Join  (cost=11381.07..468333.76 rows=5014456 width=16) (actual time=0.017..6419.383 rows=5020097.00 loops=1)
+                          Merge Cond: (uu.user_id = f.followee_id)
+                          Buffers: shared hit=1891068 read=3207596 dirtied=10558 written=21604
+                          ->  Index Only Scan using users_pkey on users uu  (cost=0.42..16346.94 rows=622900 width=8) (actual time=0.003..84.272 rows=600000.00 loops=1)
+                                Heap Fetches: 623948
+                                Index Searches: 1
+                                Buffers: shared hit=46914 read=12560 dirtied=10558 written=107
+                          ->  Index Scan using follows_followee_status_created_idx on follows f  (cost=0.56..387748.87 rows=5014456 width=16) (actual time=0.013..6062.642 rows=5008203.00 loops=1)
+                                Index Cond: (status = 'ACCEPTED'::text)
+                                Index Searches: 1
+                                Buffers: shared hit=1844154 read=3195036 written=21497
+        ->  Index Scan using users_pkey on users u  (cost=0.42..26520.35 rows=622900 width=18) (actual time=0.010..53.843 rows=600000.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=61111 read=2
+Planning:
+  Buffers: shared hit=308 read=54 dirtied=1
+Planning Time: 2.175 ms
+Execution Time: 7167.847 ms
+=== W04 run 3 ===
+Update on users u  (cost=11381.50..547410.74 rows=0 width=0) (actual time=7129.707..7129.707 rows=0.00 loops=1)
+  Buffers: shared hit=2557039 read=3223458 dirtied=23521 written=22555
+  ->  Merge Join  (cost=11381.50..547410.74 rows=643939 width=50) (actual time=115.190..6743.939 rows=24000.00 loops=1)
+        Merge Cond: (s.user_id = u.user_id)
+        Join Filter: (u.followers_count <> COALESCE(s.n, '0'::bigint))
+        Rows Removed by Join Filter: 576000
+        Buffers: shared hit=1950212 read=3209225 dirtied=10397 written=22019
+        ->  Subquery Scan on s  (cost=11381.07..507182.41 rows=647096 width=56) (actual time=82.996..6636.709 rows=600000.00 loops=1)
+              Buffers: shared hit=1889271 read=3209223 dirtied=10397 written=22019
+              ->  GroupAggregate  (cost=11381.07..500711.45 rows=647096 width=16) (actual time=82.986..6592.050 rows=600000.00 loops=1)
+                    Group Key: uu.user_id
+                    Buffers: shared hit=1889271 read=3209223 dirtied=10397 written=22019
+                    ->  Merge Left Join  (cost=11381.07..469168.21 rows=5014456 width=16) (actual time=0.022..6402.522 rows=5020097.00 loops=1)
+                          Merge Cond: (uu.user_id = f.followee_id)
+                          Buffers: shared hit=1889271 read=3209223 dirtied=10397 written=22019
+                          ->  Index Only Scan using users_pkey on users uu  (cost=0.42..17120.90 rows=647096 width=8) (actual time=0.003..84.567 rows=600000.00 loops=1)
+                                Heap Fetches: 623863
+                                Index Searches: 1
+                                Buffers: shared hit=46964 read=12340 dirtied=10397 written=88
+                          ->  Index Scan using follows_followee_status_created_idx on follows f  (cost=0.56..387748.87 rows=5014456 width=16) (actual time=0.018..6044.776 rows=5008203.00 loops=1)
+                                Index Cond: (status = 'ACCEPTED'::text)
+                                Index Searches: 1
+                                Buffers: shared hit=1842307 read=3196883 written=21931
+        ->  Index Scan using users_pkey on users u  (cost=0.42..27294.31 rows=647096 width=18) (actual time=0.009..55.376 rows=600000.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=60941 read=2
+Planning:
+  Buffers: shared hit=308 read=54 dirtied=1
+Planning Time: 1.951 ms
+Execution Time: 7129.816 ms

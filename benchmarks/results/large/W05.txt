@@ -1,0 +1,33 @@
+=== W05 run 1 ===
+Delete on stories  (cost=0.00..17496.00 rows=0 width=0) (actual time=412.735..412.735 rows=0.00 loops=1)
+  Buffers: shared hit=761631 read=7497 dirtied=7054 written=25
+  ->  Seq Scan on stories  (cost=0.00..17496.00 rows=754226 width=6) (actual time=0.019..38.887 rows=754579.00 loops=1)
+        Filter: (expires_at < '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+        Rows Removed by Filter: 45421
+        Buffers: shared read=7496 written=25
+Planning:
+  Buffers: shared hit=72 read=22
+Planning Time: 0.808 ms
+Execution Time: 412.827 ms
+=== W05 run 2 ===
+Delete on stories  (cost=0.00..17496.00 rows=0 width=0) (actual time=439.569..439.569 rows=0.00 loops=1)
+  Buffers: shared hit=761776 read=299
+  ->  Seq Scan on stories  (cost=0.00..17496.00 rows=754226 width=6) (actual time=0.008..46.485 rows=754579.00 loops=1)
+        Filter: (expires_at < '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+        Rows Removed by Filter: 45421
+        Buffers: shared hit=7197 read=299
+Planning:
+  Buffers: shared hit=94
+Planning Time: 0.169 ms
+Execution Time: 439.609 ms
+=== W05 run 3 ===
+Delete on stories  (cost=0.00..17496.00 rows=0 width=0) (actual time=443.898..443.899 rows=0.00 loops=1)
+  Buffers: shared hit=761870 read=205 dirtied=68
+  ->  Seq Scan on stories  (cost=0.00..17496.00 rows=754226 width=6) (actual time=0.012..45.617 rows=754579.00 loops=1)
+        Filter: (expires_at < '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+        Rows Removed by Filter: 45421
+        Buffers: shared hit=7291 read=205 dirtied=68
+Planning:
+  Buffers: shared hit=94
+Planning Time: 0.161 ms
+Execution Time: 443.937 ms

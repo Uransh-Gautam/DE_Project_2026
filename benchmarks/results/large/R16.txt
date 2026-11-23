@@ -1,0 +1,45 @@
+=== R16 run 1 ===
+Sort  (cost=3109.78..3112.86 rows=1229 width=27) (actual time=9.821..9.847 rows=1288.00 loops=1)
+  Sort Key: like_count DESC
+  Sort Method: quicksort  Memory: 99kB
+  Buffers: shared hit=702 read=395
+  ->  Index Scan using posts_created_at_idx on posts  (cost=0.43..3046.71 rows=1229 width=27) (actual time=0.028..9.721 rows=1288.00 loops=1)
+        Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+        Filter: (location_name ~~* '%goa%'::text)
+        Rows Removed by Filter: 64646
+        Index Searches: 1
+        Buffers: shared hit=699 read=395
+Planning:
+  Buffers: shared hit=188 read=3
+Planning Time: 1.024 ms
+Execution Time: 9.887 ms
+=== R16 run 2 ===
+Sort  (cost=3109.78..3112.86 rows=1229 width=27) (actual time=8.882..8.905 rows=1288.00 loops=1)
+  Sort Key: like_count DESC
+  Sort Method: quicksort  Memory: 99kB
+  Buffers: shared hit=1097
+  ->  Index Scan using posts_created_at_idx on posts  (cost=0.43..3046.71 rows=1229 width=27) (actual time=0.019..8.779 rows=1288.00 loops=1)
+        Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+        Filter: (location_name ~~* '%goa%'::text)
+        Rows Removed by Filter: 64646
+        Index Searches: 1
+        Buffers: shared hit=1094
+Planning:
+  Buffers: shared hit=191
+Planning Time: 0.613 ms
+Execution Time: 8.943 ms
+=== R16 run 3 ===
+Sort  (cost=3109.78..3112.86 rows=1229 width=27) (actual time=9.219..9.243 rows=1288.00 loops=1)
+  Sort Key: like_count DESC
+  Sort Method: quicksort  Memory: 99kB
+  Buffers: shared hit=1097
+  ->  Index Scan using posts_created_at_idx on posts  (cost=0.43..3046.71 rows=1229 width=27) (actual time=0.018..9.116 rows=1288.00 loops=1)
+        Index Cond: ((created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone) AND (created_at < '2026-07-01 00:00:00+05:30'::timestamp with time zone))
+        Filter: (location_name ~~* '%goa%'::text)
+        Rows Removed by Filter: 64646
+        Index Searches: 1
+        Buffers: shared hit=1094
+Planning:
+  Buffers: shared hit=191
+Planning Time: 0.599 ms
+Execution Time: 9.282 ms

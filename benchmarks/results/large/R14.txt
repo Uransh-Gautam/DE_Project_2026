@@ -1,0 +1,75 @@
+=== R14 run 1 ===
+Merge Anti Join  (cost=160.13..167.96 rows=39 width=8) (actual time=2.291..2.323 rows=580.00 loops=1)
+  Merge Cond: (f.follower_id = b.followee_id)
+  Buffers: shared hit=8 read=586
+  ->  Sort  (cost=159.06..159.16 rows=39 width=8) (actual time=2.279..2.290 rows=580.00 loops=1)
+        Sort Key: f.follower_id
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=5 read=585
+        ->  Bitmap Heap Scan on follows f  (cost=4.96..158.03 rows=39 width=8) (actual time=0.610..2.256 rows=580.00 loops=1)
+              Recheck Cond: ((followee_id = 217) AND (status = 'ACCEPTED'::text))
+              Heap Blocks: exact=579
+              Buffers: shared hit=5 read=585
+              ->  Bitmap Index Scan on follows_followee_status_created_idx  (cost=0.00..4.95 rows=39 width=0) (actual time=0.545..0.545 rows=580.00 loops=1)
+                    Index Cond: ((followee_id = 217) AND (status = 'ACCEPTED'::text))
+                    Index Searches: 1
+                    Buffers: shared hit=5 read=6
+  ->  Index Only Scan using follows_pkey on follows b  (cost=0.43..8.66 rows=13 width=8) (actual time=0.009..0.009 rows=7.00 loops=1)
+        Index Cond: (follower_id = 217)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=3 read=1
+Planning:
+  Buffers: shared hit=151 read=16
+Planning Time: 0.514 ms
+Execution Time: 2.361 ms
+=== R14 run 2 ===
+Merge Anti Join  (cost=160.13..167.96 rows=39 width=8) (actual time=0.512..0.542 rows=580.00 loops=1)
+  Merge Cond: (f.follower_id = b.followee_id)
+  Buffers: shared hit=594
+  ->  Sort  (cost=159.06..159.16 rows=39 width=8) (actual time=0.506..0.516 rows=580.00 loops=1)
+        Sort Key: f.follower_id
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=590
+        ->  Bitmap Heap Scan on follows f  (cost=4.96..158.03 rows=39 width=8) (actual time=0.077..0.488 rows=580.00 loops=1)
+              Recheck Cond: ((followee_id = 217) AND (status = 'ACCEPTED'::text))
+              Heap Blocks: exact=579
+              Buffers: shared hit=590
+              ->  Bitmap Index Scan on follows_followee_status_created_idx  (cost=0.00..4.95 rows=39 width=0) (actual time=0.047..0.047 rows=580.00 loops=1)
+                    Index Cond: ((followee_id = 217) AND (status = 'ACCEPTED'::text))
+                    Index Searches: 1
+                    Buffers: shared hit=11
+  ->  Index Only Scan using follows_pkey on follows b  (cost=0.43..8.66 rows=13 width=8) (actual time=0.002..0.002 rows=7.00 loops=1)
+        Index Cond: (follower_id = 217)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=167
+Planning Time: 0.261 ms
+Execution Time: 0.574 ms
+=== R14 run 3 ===
+Merge Anti Join  (cost=160.13..167.96 rows=39 width=8) (actual time=0.498..0.527 rows=580.00 loops=1)
+  Merge Cond: (f.follower_id = b.followee_id)
+  Buffers: shared hit=594
+  ->  Sort  (cost=159.06..159.16 rows=39 width=8) (actual time=0.491..0.501 rows=580.00 loops=1)
+        Sort Key: f.follower_id
+        Sort Method: quicksort  Memory: 25kB
+        Buffers: shared hit=590
+        ->  Bitmap Heap Scan on follows f  (cost=4.96..158.03 rows=39 width=8) (actual time=0.079..0.475 rows=580.00 loops=1)
+              Recheck Cond: ((followee_id = 217) AND (status = 'ACCEPTED'::text))
+              Heap Blocks: exact=579
+              Buffers: shared hit=590
+              ->  Bitmap Index Scan on follows_followee_status_created_idx  (cost=0.00..4.95 rows=39 width=0) (actual time=0.050..0.050 rows=580.00 loops=1)
+                    Index Cond: ((followee_id = 217) AND (status = 'ACCEPTED'::text))
+                    Index Searches: 1
+                    Buffers: shared hit=11
+  ->  Index Only Scan using follows_pkey on follows b  (cost=0.43..8.66 rows=13 width=8) (actual time=0.002..0.002 rows=7.00 loops=1)
+        Index Cond: (follower_id = 217)
+        Heap Fetches: 0
+        Index Searches: 1
+        Buffers: shared hit=4
+Planning:
+  Buffers: shared hit=167
+Planning Time: 0.277 ms
+Execution Time: 0.559 ms

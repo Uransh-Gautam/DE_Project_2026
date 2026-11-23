@@ -1,0 +1,102 @@
+=== R20 run 1 ===
+Limit  (cost=69007.78..69007.81 rows=10 width=16) (actual time=54.161..54.596 rows=10.00 loops=1)
+  Buffers: shared hit=198670 read=410
+  ->  Sort  (cost=69007.78..69409.25 rows=160588 width=16) (actual time=54.161..54.595 rows=10.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 25kB
+        Buffers: shared hit=198670 read=410
+        ->  GroupAggregate  (cost=44826.40..65537.53 rows=160588 width=16) (actual time=31.040..52.573 rows=64587.00 loops=1)
+              Group Key: c.post_id
+              Buffers: shared hit=198670 read=410
+              ->  Gather Merge  (cost=44826.40..63128.71 rows=160588 width=8) (actual time=31.036..43.403 rows=258107.00 loops=1)
+                    Workers Planned: 1
+                    Workers Launched: 1
+                    Buffers: shared hit=198670 read=410
+                    ->  Sort  (cost=43826.39..44062.55 rows=94464 width=8) (actual time=30.143..32.617 rows=129053.50 loops=2)
+                          Sort Key: c.post_id
+                          Sort Method: quicksort  Memory: 4096kB
+                          Buffers: shared hit=198670 read=410
+                          Worker 0:  Sort Method: quicksort  Memory: 3073kB
+                          ->  Nested Loop  (cost=0.86..36020.13 rows=94464 width=8) (actual time=0.172..27.112 rows=129053.50 loops=2)
+                                Buffers: shared hit=198662 read=410
+                                ->  Parallel Index Scan using posts_created_at_idx on posts p  (cost=0.43..2461.04 rows=37785 width=8) (actual time=0.010..2.170 rows=32967.00 loops=2)
+                                      Index Cond: (created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                      Index Searches: 1
+                                      Buffers: shared hit=1267
+                                ->  Index Only Scan using comments_post_id_idx on comments c  (cost=0.43..0.85 rows=4 width=8) (actual time=0.000..0.001 rows=3.91 loops=65934)
+                                      Index Cond: (post_id = p.post_id)
+                                      Heap Fetches: 0
+                                      Index Searches: 65934
+                                      Buffers: shared hit=197395 read=410
+Planning:
+  Buffers: shared hit=296 read=11
+Planning Time: 2.103 ms
+Execution Time: 54.623 ms
+=== R20 run 2 ===
+Limit  (cost=69007.78..69007.81 rows=10 width=16) (actual time=52.338..52.686 rows=10.00 loops=1)
+  Buffers: shared hit=199078
+  ->  Sort  (cost=69007.78..69409.25 rows=160588 width=16) (actual time=52.338..52.685 rows=10.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 25kB
+        Buffers: shared hit=199078
+        ->  GroupAggregate  (cost=44826.40..65537.53 rows=160588 width=16) (actual time=28.989..50.624 rows=64587.00 loops=1)
+              Group Key: c.post_id
+              Buffers: shared hit=199078
+              ->  Gather Merge  (cost=44826.40..63128.71 rows=160588 width=8) (actual time=28.985..41.329 rows=258107.00 loops=1)
+                    Workers Planned: 1
+                    Workers Launched: 1
+                    Buffers: shared hit=199078
+                    ->  Sort  (cost=43826.39..44062.55 rows=94464 width=8) (actual time=28.143..30.642 rows=129053.50 loops=2)
+                          Sort Key: c.post_id
+                          Sort Method: quicksort  Memory: 4096kB
+                          Buffers: shared hit=199078
+                          Worker 0:  Sort Method: quicksort  Memory: 3073kB
+                          ->  Nested Loop  (cost=0.86..36020.13 rows=94464 width=8) (actual time=0.023..25.121 rows=129053.50 loops=2)
+                                Buffers: shared hit=199070
+                                ->  Parallel Index Scan using posts_created_at_idx on posts p  (cost=0.43..2461.04 rows=37785 width=8) (actual time=0.009..2.126 rows=32967.00 loops=2)
+                                      Index Cond: (created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                      Index Searches: 1
+                                      Buffers: shared hit=1265
+                                ->  Index Only Scan using comments_post_id_idx on comments c  (cost=0.43..0.85 rows=4 width=8) (actual time=0.000..0.000 rows=3.91 loops=65934)
+                                      Index Cond: (post_id = p.post_id)
+                                      Heap Fetches: 0
+                                      Index Searches: 65934
+                                      Buffers: shared hit=197805
+Planning:
+  Buffers: shared hit=307
+Planning Time: 0.515 ms
+Execution Time: 52.710 ms
+=== R20 run 3 ===
+Limit  (cost=69007.78..69007.81 rows=10 width=16) (actual time=52.814..53.251 rows=10.00 loops=1)
+  Buffers: shared hit=199079
+  ->  Sort  (cost=69007.78..69409.25 rows=160588 width=16) (actual time=52.813..53.250 rows=10.00 loops=1)
+        Sort Key: (count(*)) DESC
+        Sort Method: top-N heapsort  Memory: 25kB
+        Buffers: shared hit=199079
+        ->  GroupAggregate  (cost=44826.40..65537.53 rows=160588 width=16) (actual time=29.331..51.173 rows=64587.00 loops=1)
+              Group Key: c.post_id
+              Buffers: shared hit=199079
+              ->  Gather Merge  (cost=44826.40..63128.71 rows=160588 width=8) (actual time=29.327..41.816 rows=258107.00 loops=1)
+                    Workers Planned: 1
+                    Workers Launched: 1
+                    Buffers: shared hit=199079
+                    ->  Sort  (cost=43826.39..44062.55 rows=94464 width=8) (actual time=28.438..30.915 rows=129053.50 loops=2)
+                          Sort Key: c.post_id
+                          Sort Method: quicksort  Memory: 4096kB
+                          Buffers: shared hit=199079
+                          Worker 0:  Sort Method: quicksort  Memory: 3073kB
+                          ->  Nested Loop  (cost=0.86..36020.13 rows=94464 width=8) (actual time=0.023..25.368 rows=129053.50 loops=2)
+                                Buffers: shared hit=199071
+                                ->  Parallel Index Scan using posts_created_at_idx on posts p  (cost=0.43..2461.04 rows=37785 width=8) (actual time=0.009..2.142 rows=32967.00 loops=2)
+                                      Index Cond: (created_at >= '2026-06-01 00:00:00+05:30'::timestamp with time zone)
+                                      Index Searches: 1
+                                      Buffers: shared hit=1266
+                                ->  Index Only Scan using comments_post_id_idx on comments c  (cost=0.43..0.85 rows=4 width=8) (actual time=0.000..0.001 rows=3.91 loops=65934)
+                                      Index Cond: (post_id = p.post_id)
+                                      Heap Fetches: 0
+                                      Index Searches: 65934
+                                      Buffers: shared hit=197805
+Planning:
+  Buffers: shared hit=307
+Planning Time: 0.499 ms
+Execution Time: 53.274 ms

@@ -1,0 +1,45 @@
+=== R22 run 1 ===
+Limit  (cost=3044.32..3095.02 rows=25 width=48) (actual time=8.078..8.198 rows=25.00 loops=1)
+  Buffers: shared hit=50 read=1491
+  ->  Incremental Sort  (cost=2.29..125537.00 rows=61900 width=48) (actual time=0.311..8.173 rows=1525.00 loops=1)
+        Sort Key: created_at DESC, comment_id DESC
+        Presorted Key: created_at
+        Full-sort Groups: 48  Sort Method: quicksort  Average Memory: 28kB  Peak Memory: 28kB
+        Buffers: shared hit=50 read=1491
+        ->  Index Scan using comments_hidden_created_idx on comments  (cost=0.29..122755.32 rows=61900 width=48) (actual time=0.218..8.042 rows=1526.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=41 read=1491
+Planning:
+  Buffers: shared hit=174 read=1
+Planning Time: 0.317 ms
+Execution Time: 8.208 ms
+=== R22 run 2 ===
+Limit  (cost=3044.32..3095.02 rows=25 width=48) (actual time=1.301..1.318 rows=25.00 loops=1)
+  Buffers: shared hit=1541
+  ->  Incremental Sort  (cost=2.29..125537.00 rows=61900 width=48) (actual time=0.046..1.293 rows=1525.00 loops=1)
+        Sort Key: created_at DESC, comment_id DESC
+        Presorted Key: created_at
+        Full-sort Groups: 48  Sort Method: quicksort  Average Memory: 28kB  Peak Memory: 28kB
+        Buffers: shared hit=1541
+        ->  Index Scan using comments_hidden_created_idx on comments  (cost=0.29..122755.32 rows=61900 width=48) (actual time=0.005..1.181 rows=1526.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=1532
+Planning:
+  Buffers: shared hit=175
+Planning Time: 0.273 ms
+Execution Time: 1.328 ms
+=== R22 run 3 ===
+Limit  (cost=3044.32..3095.02 rows=25 width=48) (actual time=1.481..1.498 rows=25.00 loops=1)
+  Buffers: shared hit=1541
+  ->  Incremental Sort  (cost=2.29..125537.00 rows=61900 width=48) (actual time=0.097..1.474 rows=1525.00 loops=1)
+        Sort Key: created_at DESC, comment_id DESC
+        Presorted Key: created_at
+        Full-sort Groups: 48  Sort Method: quicksort  Average Memory: 28kB  Peak Memory: 28kB
+        Buffers: shared hit=1541
+        ->  Index Scan using comments_hidden_created_idx on comments  (cost=0.29..122755.32 rows=61900 width=48) (actual time=0.006..1.309 rows=1526.00 loops=1)
+              Index Searches: 1
+              Buffers: shared hit=1532
+Planning:
+  Buffers: shared hit=175
+Planning Time: 4.055 ms
+Execution Time: 1.511 ms
