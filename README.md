@@ -1,7 +1,7 @@
 # Instagram Social Media Database: DBMS Project
 
-**Course:** Database Management Systems · **Year:** B.Tech 2nd year · **Team size:** 4
-**Database:** PostgreSQL 15 or newer · **Final submission:** Mon 23 Nov 2026
+**Course:** Database Management Systems · **Year:** B.Tech 2nd year · **Team size:** 4  
+**Database:** PostgreSQL 15 or newer · **Final submission:** Mon 23 Nov 2026  
 **Topics used:** Data types & constraints · Keys & relationships · Normalization · Query execution plans · Indexing · Query optimization · VACUUM/ANALYZE · Partitioning & sharding
 
 ## Files in this folder
@@ -16,8 +16,6 @@
 
 **Getting started:** **clone this repository and push it into your team's DE repo** (the DE repo you submitted in the form); the steps are in [`CHECKPOINTS.md`](CHECKPOINTS.md). Keep the structure shown in [Repository structure](#repository-structure-submit-exactly-this). Unzip `seed_data.zip` inside your project folder, but don't commit the CSV files. Deadlines are in [`CHECKPOINTS.md`](CHECKPOINTS.md). Then begin with Phase 1.
 
----
-
 ## Team details (fill in before you start)
 
 | Role | Name | Enrollment No. | GitHub Username |
@@ -28,8 +26,6 @@
 | Member 4 | Shlok Srivastava | 2501010434 | shloksrivastava2610-ops |
 
 **Team No.:** T0085 · **Section:** B · **Repository URL:** https://github.com/Uransh-Gautam/DE_Project_2026
-
----
 
 ## How this project works
 
@@ -42,13 +38,11 @@
 | 5 | Scalability test on the **large dataset** (given later by faculty) and final report | `docs/05_scalability_report.md`, `benchmarks/results/large/` | Code Optimization | 14 |
 | | **Total** | | | **40** |
 
----
-
 ## Phase 1: Problem statements
 
-Instagram is built around a **social graph**: users follow each other (private accounts must approve follow requests), publish **posts** (photos, videos, multi-photo carousels and reels) with captions, hashtags and locations, and post 24-hour **stories**. Other users **like** and **comment** (comments can be replies to other comments). Profiles show follower and like counts that are stored, not counted live. You have joined the Instagram India data platform team.
+Instagram is built around a **social graph**: users follow each other (private accounts must approve follow requests), publish **posts** (photos, videos, multi-photo carousels and reels) with captions, hashtags and locations, and post 24-hour **stories**. Other users **like** and **comment** (comments can be replies to other comments). Profiles show follower and like counts that are stored, not counted live.
 
-The current database was put together quickly by an earlier team. It has **no documented schema** (only data exports survive), and the product teams are complaining:
+You have joined the Instagram India data platform team. The current database was put together quickly by an earlier team. It has **no documented schema** (only data exports survive), and the product teams are complaining:
 
 | # | Problem reported | Team | Related queries |
 |---|------------------|------|-----------------|
@@ -72,8 +66,6 @@ The current database was put together quickly by an earlier team. It has **no do
 - For each problem P1–P9, write in your own words what the business needs and which **stakeholder** is affected (end user, creator, business account, feed/explore team, search, trust & safety, data quality, growth analytics).
 - Classify each problem as **customer-facing / real-time** or **reporting / analytics**. This decides your performance targets later.
 - List any assumptions you make.
-
----
 
 ## Phase 2: Work out the schema from the seed data
 
